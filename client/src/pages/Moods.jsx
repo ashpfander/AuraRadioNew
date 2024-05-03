@@ -23,7 +23,7 @@ function Moods() {
       <h2 className="mb-3">Set the Mood</h2>
       <div className="row">
         {data.getMoods.map(mood => (
-          <div className="list-group col-6 mb-3" key={mood.id}>
+          <div className="list-group col-12 col-lg-6 mb-3" key={mood.id}>
           <button
             className="moods list-group-item pt-4 pb-3"
             style={{ backgroundColor: getRandomColor() }}

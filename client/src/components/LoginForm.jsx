@@ -31,7 +31,7 @@ function LoginForm() {
 
   return (
     <div className="container mt-5 d-flex justify-content-center">
-      <form onSubmit={handleSubmit} className="col-5">
+      <form onSubmit={handleSubmit} className="col-10 col-lg-6">
         <div className="alert alert-danger" role="alert" style={{ display: errorMessage ? 'block' : 'none' }}>
           {errorMessage}
         </div>
@@ -55,8 +55,10 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" className="btn btn-primary">Log In</button>
-        <a href="/signup">Don't have a log in? Sign Up</a>
+        <button type="submit" className="form-button p-3 col-12 col-lg-2">Log In</button>
+        <div className="mt-3">
+          <a href="/signup">Don't have a log in? Sign Up</a>
+        </div>
       </form>
     </div>
   );

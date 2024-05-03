@@ -137,7 +137,7 @@ function Playlists() {
             required
             style={{ width: '100%', height: '50px' }}
             />
-            <button type="submit" className="form-button p-3 mb-4" disabled={mutationLoading}>
+            <button type="submit" className="form-button p-3 mb-4 col-12 col-lg-3" disabled={mutationLoading}>
             Send It to the Clouds
             </button>
             {mutationLoading && <p>Submitting...</p>}
