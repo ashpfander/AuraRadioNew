@@ -49,3 +49,14 @@ export const GET_PLAYLISTS = gql`
     }
   }
 `;
+
+export const GET_USER_PLAYLISTS = gql`
+  query GetUserPlaylists {
+    getUserPlaylists {
+      id
+      title
+      description
+      iframeContent
+    }
+  }
+`;

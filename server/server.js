@@ -6,6 +6,7 @@ const path = require('path');
 const { typeDefs, resolvers } = require('./schemas');
 const connectDB = require('./config/connection');
 const Mood = require('./models/mood'); 
+const { authMiddleware } = require('./utils/auth');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -43,13 +44,24 @@ const startApolloServer = async () => {
 
     await initializeMoods(); 
 
+    app.use(async (req, res, next) => {
+      try {
+        req = await authMiddleware({ req });
+        next();
+      } catch (err) {
+        console.error('Authentication middleware error:', err);
+        next(err); 
+      }
+    });
+
     const server = new ApolloServer({
       typeDefs,
       resolvers,
       formatError: (err) => {
         console.log(`GraphQL Error:`, err);
         return err;
-      }
+      },
+      context: ({ req }) => ({ user: req.user }) 
     });
 
     await server.start();
