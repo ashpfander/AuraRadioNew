@@ -57,3 +57,22 @@ export const SIGNUP_USER = gql`
   }
 `;
 
+export const UPDATE_PLAYLIST = gql`
+  mutation UpdatePlaylist($id: ObjectId!, $title: String, $description: String, $iframeContent: String) {
+    updatePlaylist(id: $id, title: $title, description: $description, iframeContent: $iframeContent) {
+      id
+      title
+      description
+      iframeContent
+    }
+  }
+`;
+
+export const DELETE_PLAYLIST = gql`
+  mutation DeletePlaylist($id: ObjectId!) {
+    deletePlaylist(id: $id) {
+      id
+    }
+  }
+`;
+
