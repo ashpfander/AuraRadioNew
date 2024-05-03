@@ -17,6 +17,7 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const token = AuthService.getToken();
+  console.log('Token from AuthService:', token); 
   return {
     headers: {
       ...headers,
