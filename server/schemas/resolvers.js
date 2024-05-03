@@ -57,6 +57,10 @@ const resolvers = {
         console.error("Failed to fetch playlists by mood:", error);
         throw new Error("Error loading the playlists: " + error.message);
       }
+    },
+    getUserPlaylists: async (_, __, { user }) => {
+      if (!user) throw new Error("Authentication required.");
+      return Playlist.find({ user: user._id });
     }
   },
   Mutation: {
@@ -122,6 +126,26 @@ const resolvers = {
       await user.save();
       const token = signToken(user);
       return { token, user };
+    },
+    updatePlaylist: async (_, { id, title, description, iframeContent }, { user }) => {
+      if (!user) throw new Error("Authentication required.");
+      const playlist = await Playlist.findById(id);
+      if (!playlist) throw new Error("Playlist not found.");
+      if (playlist.user.toString() !== user._id.toString()) throw new Error("Unauthorized.");
+      
+      playlist.title = title ?? playlist.title;
+      playlist.description = description ?? playlist.description;
+      playlist.iframeContent = iframeContent ?? playlist.iframeContent;
+      await playlist.save();
+      return playlist;
+    },
+    deletePlaylist: async (_, { id }, { user }) => {
+      if (!user) throw new Error("Authentication required.");
+      const playlist = await Playlist.findById(id);
+      if (!playlist) throw new Error("Playlist not found.");
+      if (playlist.user.toString() !== user._id.toString()) throw new Error("Unauthorized.");
+      await playlist.remove();
+      return playlist;
     }
   }
 };
