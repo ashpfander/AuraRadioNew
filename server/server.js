@@ -41,10 +41,10 @@ async function initializeMoods() {
   const defaultMoods = [
       { name: "Happy", description: "Feel the good vibes" },
       { name: "Sad", description: "Cry me a river" },
-      { name: "Energized", description: "Don't Stop Movin'" },
+      { name: "Energized", description: "Don't dtop movin'" },
       { name: "Nostalgic", description: "I grew up on that" },
       { name: "Rock", description: "It's only rock 'n' roll (but i like it)" },
-      { name: "Metal", description: "Distorted Decibels" },
+      { name: "Metal", description: "Distorted decibels" },
       { name: "Grunge", description: "The dream of the '90s" },
       { name: "Pop", description: "Chart toppers only" }
   ];
