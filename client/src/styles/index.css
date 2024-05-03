@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --purple: #c7a7ff;
+  --darkerpurple: #9119c9;
+  --hoveryellow: #d8d8d8c7;
+}
+
+form a {
+  text-decoration: none;
+  color: var(--darkerpurple);
+}
+
+form a:hover {
+  color: var(--purple);
+}
+
+header {
+  background: var(--darkerpurple);
+  padding: 1rem;
+}
+
+header h1 {
+  color: rgb(255, 255, 255);
+  font-size: 3rem;
+}
+
+.form-button {
+  background-color: rgb(124, 168, 124);
+  border-style:hidden;
+  border-radius: 0.5rem;
+  color: white;
+}
+
+.form-button:hover {
+  background-color: #85b6bb;
+}
+
+.home {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.home-button {
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.home-button:after {
+  content: "";
+  background-color: #ffe54c;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: top 0.2s, left 0.2s;
+}
+
+.home-button:hover:after {
+  top: 0;
+  left: 0;
+  transition: top 0.2s, left 0.2s;
+}
+
+.home-link {
+  text-decoration: none;
+}
+
+.line {
+  border: solid #40a2ad 2px;
+}
+
+.moods {
+  color: white;
+}
+
+.moods:hover {
+  opacity: 0.85;
+}
+
+.nav-link {
+  color: white;
+  font-size: 1.35rem;
+}
+
+.nav-link:hover,
+.nav > .nav-item > .active {
+  color: var(--hoveryellow);
+}
