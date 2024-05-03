@@ -39,7 +39,7 @@ function Navbar() {
         <Link to="/yourPlaylist"
         // Check to see if the currentPage is `Your Playlists`, and if so we use the active link class. Otherwise, we set it to a regular link class.
         className={currentPage === '/yourPlaylist' ? 'nav-link active' : 'nav-link'}>
-          Your Playlist History
+          My Playlists
         </Link>
         </li>
         <li className="nav-item" data-bs-dismiss="offcanvas">

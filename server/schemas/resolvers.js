@@ -5,7 +5,6 @@ const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
 const ObjectId = mongoose.Types.ObjectId;
 const { ApolloError } = require('apollo-server-express');
-
 // Custom ObjectId scalar
 const objectIdScalar = new GraphQLScalarType({
   name: 'ObjectId',
@@ -26,7 +25,6 @@ const objectIdScalar = new GraphQLScalarType({
     return null;
   }
 });
-
 const resolvers = {
   ObjectId: objectIdScalar,
   Query: {
@@ -56,6 +54,20 @@ const resolvers = {
       } catch (error) {
         console.error("Failed to fetch playlists by mood:", error);
         throw new Error("Error loading the playlists: " + error.message);
+      }
+    },
+    getUserPlaylists: async (_, args, { user }) => {
+      console.log("Fetching playlists for user:", user ? user.id : "No user authenticated");
+      if (!user) {
+        throw new Error("Authentication required.");
+      }
+      try {
+        const playlists = await Playlist.find({ user: user._id });
+        console.log("Playlists fetched:", playlists);
+        return playlists;
+      } catch (error) {
+        console.error("Error fetching user playlists:", error);
+        throw new Error("Failed to fetch playlists.");
       }
     }
   },
@@ -122,10 +134,32 @@ const resolvers = {
       await user.save();
       const token = signToken(user);
       return { token, user };
+    },
+    updatePlaylist: async (_, { id, title, description, iframeContent }, { user }) => {
+      if (!user) throw new Error("Authentication required.");
+      const playlist = await Playlist.findById(id);
+      if (!playlist) throw new Error("Playlist not found.");
+      if (playlist.user.toString() !== user._id.toString()) throw new Error("Unauthorized.");
+
+      playlist.title = title ?? playlist.title;
+      playlist.description = description ?? playlist.description;
+      playlist.iframeContent = iframeContent ?? playlist.iframeContent;
+      await playlist.save();
+      return playlist;
+    },
+    deletePlaylist: async (_, { id }, { user }) => {
+      if (!user) throw new Error("Authentication required.");
+      try {
+        const playlist = await Playlist.findById(id);
+        if (!playlist) throw new Error("Playlist not found.");
+        if (playlist.user.toString() !== user._id.toString()) throw new Error("Unauthorized.");
+        await Playlist.findByIdAndDelete(id);
+        return playlist; 
+      } catch (error) {
+        console.error("Error deleting playlist:", error);
+        throw new Error("Failed to delete playlist.");
+      }
     }
   }
 };
-
 module.exports = resolvers;
-
-

@@ -43,7 +43,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/yourPlaylist',
-        element: <YourPlaylist />,
+        element: AuthService.isLoggedIn() ? <YourPlaylist /> : <Navigate to="/login" />,
       }
     ]
   }
