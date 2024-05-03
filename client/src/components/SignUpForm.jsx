@@ -38,7 +38,7 @@ function SignUpForm() {
 
   return (
     <div className="container mt-5 d-flex justify-content-center">
-      <form onSubmit={handleSubmit} className="col-5">
+      <form onSubmit={handleSubmit} className="col-10 col-lg-6">
         <div className="mb-3">
           <label htmlFor="username" className="form-label">Username:</label>
           <input
@@ -70,7 +70,7 @@ function SignUpForm() {
           />
         </div>
         {errorMessage && <div className="alert alert-danger" role="alert">{errorMessage}</div>}
-        <button type="submit" className="btn btn-primary" disabled={loading}>Sign Up</button>
+        <button type="submit" className="form-button p-3 col-12 col-lg-3" disabled={loading}>Sign Up</button>
         <div className="mt-3">
           <a href="/login">Already have a log in? Log In</a>
         </div>
