@@ -6,19 +6,18 @@ function Home() {
 
 
   useEffect(() => {
-    // Sets the background color based on path
     const getBackgroundColor = () => {
       if (location.pathname === '/') {
-        document.body.style.backgroundColor = '#9119c9'; // Sets this background color only for home route
+        document.body.style.backgroundColor = '#9119c9'; 
       } else {
-        document.body.style.backgroundColor = 'white'; // Set default background color of white for everywhere else
+        document.body.style.backgroundColor = 'white'; 
       }
     };
 
     getBackgroundColor();
 
     return () => {
-      document.body.style.backgroundColor = ''; // Reset background color when component unmounts
+      document.body.style.backgroundColor = ''; 
     };
   }, [location]);
 

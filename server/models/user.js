@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true }
 });
 
-// Hash the password before saving it to the database
 userSchema.pre('save', function(next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
@@ -16,7 +15,6 @@ userSchema.pre('save', function(next) {
   next();
 });
 
-// Add a method to the schema to validate a password
 userSchema.methods.isCorrectPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 };

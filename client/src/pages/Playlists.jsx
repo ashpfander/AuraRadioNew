@@ -31,7 +31,6 @@ function Playlists() {
           const currentMood = data.getMoods.find(mood => mood.id === moodId);
           if (currentMood) {
             const currentMoodName = currentMood.name;
-            // console.log(currentMoodName);
             setMoodName(currentMoodName);
           }
         }
@@ -79,7 +78,6 @@ function Playlists() {
       return; 
     }
 
-    // Check if any of the input fields are empty
     if (title === '' || iframeInput === '' || description === '') {
       setErrorMessage('Some or all inputs are empty. Please fill out correctly.');
       return;

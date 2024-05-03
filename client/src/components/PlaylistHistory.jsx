@@ -5,7 +5,7 @@ import { UPDATE_PLAYLIST, DELETE_PLAYLIST } from '../utils/mutations';
 
 function PlaylistHistory() {
   const { loading, error, data } = useQuery(GET_USER_PLAYLISTS);
-  const [editId, setEditId] = useState(null); // State to manage edit mode
+  const [editId, setEditId] = useState(null); 
   const [formData, setFormData] = useState({ title: '', description: '', iframeContent: '' });
 
   useEffect(() => {
