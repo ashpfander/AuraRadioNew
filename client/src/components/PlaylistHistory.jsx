@@ -57,28 +57,32 @@ function PlaylistHistory() {
    if (error) return <p>Error loading playlists: {error.message}</p>;
  
    return (
-     <div>
+     <div className="container">
+      <div className="mt-5 justify-content-center">
        {data && data.getUserPlaylists.map(playlist => (
          <div key={playlist.id}>
            {editId === playlist.id ? (
              <form onSubmit={handleSubmit}>
-               <input type="text" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} />
-               <textarea value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
-               <textarea value={formData.iframeContent} onChange={(e) => setFormData({ ...formData, iframeContent: e.target.value })} />
-               <button type="submit">Save</button>
-               <button onClick={() => setEditId(null)}>Cancel</button>
+               <input className="form-control mb-3" type="text" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} />
+               <textarea className="form-control mb-3" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
+               <textarea className="form-control mb-3" value={formData.iframeContent} onChange={(e) => setFormData({ ...formData, iframeContent: e.target.value })} />
+               <button className="form-button p-3 me-2" type="submit">Save</button>
+               <button className="form-button p-3" onClick={() => setEditId(null)}>Cancel</button>
+               <hr className="line"/>
              </form>
            ) : (
              <>
                <h3>{playlist.title}</h3>
                <p>{playlist.description}</p>
-               <div dangerouslySetInnerHTML={{ __html: playlist.iframeContent }} />
-               <button onClick={() => handleEdit(playlist)}>Edit</button>
-               <button onClick={() => handleDelete(playlist.id)}>Delete</button>
+               <div className="mb-3" dangerouslySetInnerHTML={{ __html: playlist.iframeContent }} />
+               <button className="form-button p-3 me-2" onClick={() => handleEdit(playlist)}>Edit</button>
+               <button className="form-button p-3" onClick={() => handleDelete(playlist.id)}>Delete</button>
+               <hr className="line"/>
              </>
            )}
          </div>
        ))}
+       </div>
      </div>
    );
  }
