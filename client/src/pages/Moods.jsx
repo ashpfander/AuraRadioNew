@@ -20,7 +20,7 @@ function Moods() {
 
   return (
     <div className="container-fluid text-center p-5">
-      <h2 className="mb-3">Select a Playlist for your Mood!</h2>
+      <h2 className="mb-3">Set the Mood</h2>
       <div className="row">
         {data.getMoods.map(mood => (
           <div className="list-group col-6 mb-3" key={mood.id}>

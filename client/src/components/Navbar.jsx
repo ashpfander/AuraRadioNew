@@ -33,7 +33,7 @@ function Navbar() {
         <li className="nav-item">
         <Link to="/yourPlaylist"
         className={currentPage === '/yourPlaylist' ? 'nav-link active' : 'nav-link'}>
-          Your Playlist History
+          My Playlists
         </Link>
         </li>
         <li className="nav-item">

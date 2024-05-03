@@ -24,7 +24,7 @@ function Home() {
   return (
     <div className="container">
       <div className="home text-center p-5">
-        <h2>Playlists that'll put you in a mood.</h2>
+        <h2>Playlists that'll put you in a mood</h2>
         <a href="/moods">
           <button className="p-3 mt-3 home-button">Explore Moods</button>
         </a>

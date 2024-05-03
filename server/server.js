@@ -18,14 +18,14 @@ async function initializeMoods() {
     if (count === 0) {
       console.log('No moods found, initializing default moods...');
       const defaultMoods = [
-        { name: "Happy", description: "Feel good vibes" },
-        { name: "Sad", description: "Melancholic tunes" },
-        { name: "Energized", description: "Power up with high-energy beats and uplifting rhythms." },
-        { name: "Nostalgic", description: "Revisit the classics that take you back in time." },
-        { name: "Rock", description: "Unleash the guitars with the best of rock." },
-        { name: "Metal", description: "Dive into the intense world of heavy metal." },
-        { name: "Grunge", description: "Get raw and grungy with iconic tracks from the underground." },
-        { name: "Pop", description: "Catchy hooks and melodies that stay with you." }
+        { name: "Happy", description: "Feel the good vibes" },
+        { name: "Sad", description: "Cry me a river" },
+        { name: "Energized", description: "Don't Stop Movin'" },
+        { name: "Nostalgic", description: "I grew up on that" },
+        { name: "Rock", description: "It's only rock 'n' roll (but i like it)" },
+        { name: "Metal", description: "Distorted Decibels" },
+        { name: "Grunge", description: "The dream of the '90s" },
+        { name: "Pop", description: "Chart toppers only" }
       ];
       await Mood.insertMany(defaultMoods);
       console.log('Default moods have been initialized');
