@@ -58,9 +58,19 @@ const resolvers = {
         throw new Error("Error loading the playlists: " + error.message);
       }
     },
-    getUserPlaylists: async (_, __, { user }) => {
-      if (!user) throw new Error("Authentication required.");
-      return Playlist.find({ user: user._id });
+    getUserPlaylists: async (_, args, { user }) => {
+      console.log("Fetching playlists for user:", user ? user.id : "No user authenticated");
+      if (!user) {
+        throw new Error("Authentication required.");
+      }
+      try {
+        const playlists = await Playlist.find({ user: user._id });
+        console.log("Playlists fetched:", playlists);
+        return playlists;
+      } catch (error) {
+        console.error("Error fetching user playlists:", error);
+        throw new Error("Failed to fetch playlists.");
+      }
     }
   },
   Mutation: {
@@ -141,11 +151,16 @@ const resolvers = {
     },
     deletePlaylist: async (_, { id }, { user }) => {
       if (!user) throw new Error("Authentication required.");
-      const playlist = await Playlist.findById(id);
-      if (!playlist) throw new Error("Playlist not found.");
-      if (playlist.user.toString() !== user._id.toString()) throw new Error("Unauthorized.");
-      await playlist.remove();
-      return playlist;
+      try {
+        const playlist = await Playlist.findById(id);
+        if (!playlist) throw new Error("Playlist not found.");
+        if (playlist.user.toString() !== user._id.toString()) throw new Error("Unauthorized.");
+        await Playlist.findByIdAndDelete(id);
+        return playlist; 
+      } catch (error) {
+        console.error("Error deleting playlist:", error);
+        throw new Error("Failed to delete playlist.");
+      }
     }
   }
 };

@@ -35,15 +35,19 @@ const typeDefs = gql`
     getMoods: [Mood]
     getPlaylists: [Playlist]
     getPlaylistsByMood(moodId: ObjectId!): [Playlist]
+    getUserPlaylists: [Playlist] # Ensures the query to fetch user-specific playlists is defined.
   }
 
   type Mutation {
     createUser(username: String!, email: String!, password: String!): User
     createMood(name: String!): Mood
     createPlaylist(title: String!, iframeContent: String!, description: String!, userId: ObjectId!, moodId: ObjectId!): Playlist
+    updatePlaylist(id: ObjectId!, title: String, description: String, iframeContent: String): Playlist
+    deletePlaylist(id: ObjectId!): Playlist
     login(email: String!, password: String!): Auth
     signup(username: String!, email: String!, password: String!): Auth
   }
 `;
 
 module.exports = typeDefs;
+
