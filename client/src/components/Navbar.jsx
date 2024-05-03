@@ -24,7 +24,7 @@ function Navbar() {
 
   return (
     <ul className="nav">
-      <li className="nav-item">
+      <li className="nav-item" data-bs-dismiss="offcanvas">
         <Link to="/moods"
           // This is a conditional (ternary) operator that checks to see if the current page is "Moods"
           // If it is, we set the current page to 'nav-link-active', otherwise we set it to 'nav-link'
@@ -35,27 +35,27 @@ function Navbar() {
       {/* if user is logged in show your playlists and logout */}
       {Auth.isLoggedIn() ? (
         <>
-        <li className="nav-item">
+        <li className="nav-item" data-bs-dismiss="offcanvas">
         <Link to="/yourPlaylist"
         // Check to see if the currentPage is `Your Playlists`, and if so we use the active link class. Otherwise, we set it to a regular link class.
         className={currentPage === '/yourPlaylist' ? 'nav-link active' : 'nav-link'}>
           Your Playlist History
         </Link>
         </li>
-        <li className="nav-item">
+        <li className="nav-item" data-bs-dismiss="offcanvas">
         <Link onClick={Auth.logout} className="nav-link">Logout</Link>
         </li>
         </>
       ) : (
         <>
-        <li className="nav-item">
+        <li className="nav-item" data-bs-dismiss="offcanvas">
           <Link to="/login"
           // Check to see if the currentPage is `Login`, and if so we use the active link class. Otherwise, we set it to a regular link class.
           className={currentPage === '/login' ? 'nav-link active' : 'nav-link'}>
           Login
           </Link>
         </li>
-        <li className="nav-item">
+        <li className="nav-item" data-bs-dismiss="offcanvas">
           <Link to="/signup"
           // Check to see if the currentPage is `Sign Up`, and if so we use the active link class. Otherwise, we set it to a regular link class.
           className={currentPage === '/signup' ? 'nav-link active' : 'nav-link'}>

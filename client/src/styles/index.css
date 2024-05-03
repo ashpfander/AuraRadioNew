@@ -25,7 +25,11 @@ header {
 
 header h1 {
   color: rgb(255, 255, 255);
-  font-size: 3rem;
+  font-size: 2.6rem;
+}
+
+hr {
+  display: none;
 }
 
 .form-button {
@@ -104,4 +108,29 @@ header h1 {
 .nav-link:hover,
 .nav > .nav-item > .active {
   color: var(--hoveryellow);
+}
+
+@media screen and (max-width: 991px) {
+
+  hr {
+    display: block;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-item {
+    margin-bottom: 1rem;
+  }
+
+  .nav-link {
+    color: var(--darkerpurple)
+  }
+
+  .nav-link:hover,
+  .nav > .nav-item > .active {
+  color: var(--purple);
+}
 }
