@@ -1,14 +1,17 @@
+/*Reset default margin and padding for all elements */
 * {
   margin: 0;
   padding: 0;
 }
 
+/* Define custom color variables */
 :root {
   --purple: #c7a7ff;
   --darkerpurple: #9119c9;
   --hoveryellow: #d8d8d8c7;
 }
 
+/* Styling for links within forms */
 form a {
   text-decoration: none;
   color: var(--darkerpurple);
@@ -18,6 +21,7 @@ form a:hover {
   color: var(--purple);
 }
 
+/* Header styling */
 header {
   background: var(--darkerpurple);
   padding: 1rem;
@@ -32,6 +36,7 @@ header hr {
   display: none;
 }
 
+/* Styling for form buttoms */
 .form-button {
   background-color: rgb(124, 168, 124);
   border-style:hidden;
@@ -43,6 +48,7 @@ header hr {
   background-color: #85b6bb;
 }
 
+/* Home section styling */
 .home {
   color: white;
   position: absolute;

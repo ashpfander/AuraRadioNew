@@ -5,7 +5,8 @@ const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
 const ObjectId = mongoose.Types.ObjectId;
 const { ApolloError } = require('apollo-server-express');
-// Custom ObjectId scalar
+
+// Define Custom GraphQL scalar type for MongoDB ObjectId
 const objectIdScalar = new GraphQLScalarType({
   name: 'ObjectId',
   description: 'MongoDB ObjectId scalar type',
@@ -25,18 +26,29 @@ const objectIdScalar = new GraphQLScalarType({
     return null;
   }
 });
+
+// Define Graphql resolvers
 const resolvers = {
-  ObjectId: objectIdScalar,
+  ObjectId: objectIdScalar, 
+  // Assign custom scalar to ObjectId
+
   Query: {
+    // Resolver function to get all users
     getUsers: async () => {
       return User.find({});
     },
+
+    // Resolvers function to get all moods
     getMoods: async () => {
       return Mood.find({});
     },
+
+    // Resolver function to get all playlists
     getPlaylists: async () => {
       return Playlist.find({});
     },
+
+    // Resolver function to get playlist by moodId
     getPlaylistsByMood: async (_, { moodId }) => {
       console.log("Received moodId:", moodId);
       if (!ObjectId.isValid(moodId)) {
@@ -56,6 +68,8 @@ const resolvers = {
         throw new Error("Error loading the playlists: " + error.message);
       }
     },
+
+    // Resolver function to get playlist for authenticated user
     getUserPlaylists: async (_, args, { user }) => {
       console.log("Fetching playlists for user:", user ? user.id : "No user authenticated");
       if (!user) {
@@ -72,16 +86,21 @@ const resolvers = {
     }
   },
   Mutation: {
+    // Resolver function to create a new user
     createUser: async (_, { username, email, password }) => {
       const newUser = new User({ username, email, password });
       await newUser.save();
       return newUser;
     },
+
+    // Resolver function to create a new mood
     createMood: async (_, { name, description }) => {
       const newMood = new Mood({ name, description });
       await newMood.save();
       return newMood;
     },
+
+    // Resolver function to create a new playlist
     createPlaylist: async (_, { title, iframeContent, description, userId, moodId }) => {
       console.log("Received mutation data:", { title, iframeContent, description, userId, moodId });
     
@@ -106,6 +125,8 @@ const resolvers = {
         throw new Error("Failed to save the playlist to the database. Please try again.");
       }
     },
+
+    // Resolver function to handle user login
     login: async (_, { email, password }) => {
       try {
         const user = await User.findOne({ email });
@@ -124,6 +145,8 @@ const resolvers = {
         throw new Error('Incorrect Email or Password');
       }
     },
+
+    // Resolver function to hsndle user signup
     signup: async (_, { username, email, password }) => {
       const existingUser = await User.findOne({ email });
       if (existingUser) {
@@ -147,6 +170,8 @@ const resolvers = {
       await playlist.save();
       return playlist;
     },
+
+    // Resolver function to delete an existing playlist
     deletePlaylist: async (_, { id }, { user }) => {
       if (!user) throw new Error("Authentication required.");
       try {
@@ -162,4 +187,6 @@ const resolvers = {
     }
   }
 };
+
+// Export resolvers for use with Apollo Server
 module.exports = resolvers;
